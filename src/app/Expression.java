@@ -172,7 +172,7 @@ public class Expression {
 		return 0; // should never return 0 when the variable exists
 	}
 
-	//Replaces all 
+	//Replaces all variables with their respective values
 	private static String substituteVariables(String expr, ArrayList<Variable> vars, ArrayList<Array> arrays) {
 		String subExpr = "";
 		for (int i = 0; i < expr.length(); i++) {
