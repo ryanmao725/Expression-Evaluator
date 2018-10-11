@@ -186,6 +186,8 @@ public class Expression {
 					subExpr += String.valueOf(getVariable(varName, vars).value);
 				} else if (getArray(varName, arrays) != null) {
 					subExpr += varName; //For now, just adds the name of array into expression
+				} else {
+					System.out.println("There is no variable " + varName + "!");
 				}
 
 			} else {
@@ -200,12 +202,25 @@ public class Expression {
 		Stack<String> ops = new Stack<>();
 		
 		if (expr.contains("[")) {
-			evaluateArrays(expr.substring(expr.indexOf("[") + 1, expr.lastIndexOf("]")));
+			return evaluateArrays(expr.substring(expr.indexOf("[") + 1, expr.lastIndexOf("]")), arrays);
 		} else {
-			
+			return String.valueOf(evaluateExpression(expr));
 		}
+	
+	}
+	
+	private static double evalauteExpression(String expr) {
+		Stack<Integer> numbers = new Stack<>();
+		Stack<String> operators = new Stack<>();
 		
-		return "";
+		for (int i = 0; i < expr.length(); i++) {
+			if (Character.isDigit(expr.charAt(i))) {
+				numbers.push(Integer.parseInt(String.valueOf(expr.charAt(i))));
+			} else {
+				operators.push(String.valueOf(expr.charAt(i)));
+			}
+		}
+		return 0; //Should never happen
 	}
 
 	// Solely numbers, parentheses, and operators
